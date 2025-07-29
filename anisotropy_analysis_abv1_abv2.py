@@ -9,6 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 from mpl_toolkits.mplot3d import Axes3D
+np.set_printoptions(precision=4, suppress=False)
 
 # Description: This script demonstrates the implementation of anisotropic analysis
 ###########################################
@@ -17,15 +18,41 @@ from mpl_toolkits.mplot3d import Axes3D
 
 #If you want to save a figure, add the command: plt.savefig('directory to figure/figure.png', dpi=300) under the desired figure
 
-#Required input: 6 components of the Reynolds stress tensor at the vortex core ABV1 non-dimensionalized by U0^2, where U0 is the carriage speed
-tau111 =0.00623017949501761086
-tau221 =0.00559173650200585955
-tau331 = 0.00966846139481075152
-tau121 =-0.000668399534258570403
-tau131 =0.000133167889768736426
-tau231 = 0.00257444311422968912
+# Read data, skip the first line (header)
+tau_data1 = np.loadtxt("./Example_data/Reynolds_stress_tensor_ABV1.txt", skiprows=1)
 
-np.set_printoptions(precision=4, suppress=False)
+# Assign values
+tau111, tau221, tau331, tau121, tau131, tau231 = tau_data1
+
+
+# Read data, skip the first line (header)
+tau_data2 = np.loadtxt("./Example_data/Reynolds_stress_tensor_ABV2.txt", skiprows=1)
+
+# Assign values
+tau112, tau222, tau332, tau122, tau132, tau232 = tau_data2
+
+# Read data, skip the first line (header)
+uvw_data1 = np.loadtxt("./Example_data/mean_velocity_ABV1.txt", skiprows=1)
+
+# Assign values
+u_mean1, v_mean1, w_mean1 = uvw_data1
+
+
+# Read data, skip the first line (header)
+uvw_data2 = np.loadtxt("./Example_data/mean_velocity_ABV2.txt", skiprows=1)
+
+# Assign values
+u_mean2, v_mean2, w_mean2 = uvw_data2
+
+
+##########################################
+##########################################
+##########################################
+##########################################
+###########################################
+#############OUTPUT SECTION#################
+###########################################
+
 
 # Construct symmetric 3x3 matrix
 tau_matrix1 = np.array([
@@ -36,13 +63,6 @@ tau_matrix1 = np.array([
 
 print("Reynolds Stress tensor at ABV1:")
 print(tau_matrix1)
-#Required input: 6 components of the Reynolds stress tensor at the vortex core ABV2 non-dimensionalized by U0^2, where U0 is the carriage speed
-tau112 = 0.00952383554719142544
-tau222 = 0.00715071803048299322
-tau332 = 0.00803990765165650198
-tau122 = -0.000185044789914437014
-tau132 =  0.00106408182142004367
-tau232 = -0.00221661018841354338
 
 # Construct symmetric 3x3 matrix
 tau_matrix2 = np.array([
@@ -53,17 +73,6 @@ tau_matrix2 = np.array([
 
 print("Reynolds Stress tensor at ABV2:")
 print(tau_matrix2)
-#Required input: mean velocity components at the vortex core ABV1 non-dimensionalized by U0, where U0 is the carriage speed
-u_mean1 = 0.282123220174300804
-v_mean1 = -1.11197057340822573e-05
-w_mean1 = 8.56920941568580023e-06
-
-#Required input: mean velocity components at the vortex core ABV2 non-dimensionalized by U0^2, where U0 is the carriage speed
-u_mean2 = 0.191143031520104256
-v_mean2 = -0.000389393143790341156
-w_mean2 = -0.000310207878056412145
-
-		
 
 
 vel_mean1= np.array([u_mean1, v_mean1, w_mean1])
@@ -75,8 +84,7 @@ print(", ".join([f"{v:.6e}" for v in vel_mean1]))
 
 print("Mean velocity at ABV2:")
 print(", ".join([f"{v:.6e}" for v in vel_mean2]))
-##########################################
-##########################################
+
 
 
 #Reorders RS in a tensor
@@ -261,6 +269,7 @@ plt.ylim(-0.1,0.4)
 plt.xlabel('$III_b$')
 plt.ylabel('$-II_b$')
 plt.title('Anisotropic Invariant Map (AIM)')
+plt.legend(fontsize=14)
 plt.savefig(r'./aim.png', dpi=300)
 
 print("Anisotropic invariant map correctly generated.")
