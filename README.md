@@ -1,9 +1,11 @@
 # Anisotropy-analysis-JBC-W2025
 
 ### Written by C. Milano 
- Contact Info: cmilano@uiowa.edu
- 
-### July 29, 2025
+Author's contact Info: cmilano@uiowa.edu Additional PoC: frederick-stern@uiowa.edu
+Last Updated: July 29th, 2025
+
+## User Agreement and Approval for Usage
+Users of this software are not allowed re-distribute the files of this repository (including all subdirectories) anywhere. Furthermore, usage of this software is only granted with the expressed approval of IIHR - Hydroscience & Engineering. Please contact Dr. Frederick Stern (frederick-stern@uiowa.edu) for approval.
 
 ## Description:
 A Python code for extracting turbulence characteristic quantities at two vortex cores. This program is designed to output anisotropic Reynolds stresses, eigenvalues of the Reynolds stress tensor and anisotropic Reynolds stress tensor, turbulence invariants, and Reynolds stress ellipsoid.
